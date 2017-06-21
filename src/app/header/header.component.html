@@ -1,0 +1,21 @@
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" routerLink="/index">{{title}}</a>
+
+  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <a *ngIf="loged" class="navbar-brand" routerLink="/perfil">Hola, <span id="usern">{{ username }}</span>!</a>
+
+    <div *ngIf="loged" class="vertical-line"></div>
+
+    <a id="pnuevo" *ngIf="loged" class="navbar-brand" routerLink="/nproduct">Crear un Producto</a>
+
+    <div *ngIf="loged" class="vertical-line"></div>
+
+    <a *ngIf="loged" id="lk" class="navbar-brand" (click)="logout()">Log Out</a>
+
+    <button *ngIf="!loged" class="btn btn-outline-success col-sm-1" id="boton_login" routerLink="/login">Log In</button>
+    <button *ngIf="!loged" class="btn btn-outline-success col-sm-1" id="boton_register" routerLink="/register">Register</button>
+  </div>
+</nav>

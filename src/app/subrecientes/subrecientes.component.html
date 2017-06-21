@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 padding-10 rounded-top" *ngFor="let product of productos">
+                <div class="thumbnail">
+                    <img src="/api/image?id={{product['_id']}}" alt="" class="img-responsive">
+                <div class="caption">
+                    <h4 class="pull-right">precio de salida: {{product["precio_sal"]}}<span class="glyphicon glyphicon-euro" ></span></h4>
+                    <h4><a [routerLink]="['/subasta', product['_id']]">{{product.name}}</a></h4>
+                </div>
+                <div class="space-ten"></div>
+                <div class="btn-ground text-center">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#'+ product['_id']"><i class="fa fa-search"></i>Quick View</button>
+                </div>
+                <div class="space-ten"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade product_view" id="{{product['_id']}}" *ngFor="let product of productos">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                <h3 class="modal-title">{{product.name}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 product_img">
+                        <img src="/api/image?id={{product['_id']}}" alt="" class="img-responsive">
+                    </div>
+                    <div class="col-md-6 product_content">
+                        <h4>{{product.name}}</h4>
+                        <p>{{product.desc}}</p>
+                        <h3 class="cost" *ngIf="product.preciofin; else pr">{{product.preciofin}}<span class="glyphicon glyphicon-euro" ></span><small class="pre-cost" >{{product["precio_sal"]}}<span class="glyphicon glyphicon-euro" ></span></small></h3>
+                        <h3 class="cost" id="pr">{{product["precio_sal"]}}<span class="glyphicon glyphicon-euro"></span></h3>
+                        
+                        <div class="space-ten"></div>
+                        <div class="btn-ground">
+                            <button type="button" class="btn btn-primary" [routerLink]="['/subasta', product['_id']]">Subasta <span class="glyphicon glyphicon-shopping-cart"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

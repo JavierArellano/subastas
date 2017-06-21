@@ -1,0 +1,17 @@
+.product_view .modal-dialog{
+	max-width: 500px;
+	width: 100%;
+}
+.pre-cost{
+	text-decoration: line-through;
+	color: #a5a5a5;
+}
+.space-ten{
+	padding: 10px 0;
+}
+.padding-10{
+	padding-top: 10px;
+}
+/* .img-responsive{
+	height: 230px;
+} */

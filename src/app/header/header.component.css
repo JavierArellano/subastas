@@ -1,0 +1,21 @@
+.active{
+    background-color: green;
+    color: white;
+}
+#lk:hover{
+	color: #265301;
+	text-decoration: underline;
+}
+#usern:hover{
+	text-decoration: underline;
+}
+#pnuevo:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+div.vertical-line{
+      width: 1px;
+      height: 25px;
+      margin-right: 10px;
+      background-color: silver;
+}

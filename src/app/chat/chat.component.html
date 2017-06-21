@@ -1,0 +1,81 @@
+
+
+
+
+
+
+<div class="panel panel-primary" *ngIf="joinned">
+    <div class="panel-heading" *ngIf="producto">
+        <span class="glyphicon glyphicon-comment"></span> {{ producto.name }}
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#'+ room"><i class="fa fa-search"></i>Pujar</button>
+        </div>
+    </div>
+    <div #scrollMe class="panel-body">
+        <ul class="chat">
+            <li *ngFor="let c of chats">
+              <div class="left clearfix" *ngIf="c.nickname===msgData.nickname; else rightchat">
+                <div class="chat-body clearfix">
+                    <div class="header">
+                        <strong class="primary-font">{{ c.nickname }}</strong> <small class="pull-right text-muted">
+                            <span class="glyphicon glyphicon-time"></span>{{ c.updated_at | date: 'medium' }}</small>
+                    </div>
+                    <p>{{ c.message }}</p>
+                </div>
+              </div>
+              <ng-template #rightchat>
+                <div class="right clearfix">
+                  <div class="chat-body clearfix">
+                      <div class="header">
+                          <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>{{ c.updated_at | date: 'medium' }}</small>
+                          <strong class="pull-right primary-font">{{ c.nickname }}</strong>
+                      </div>
+                      <p>{{ c.message }}</p>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+        </ul>
+    </div>
+    <div class="panel-footer">
+      <form (ngSubmit)="sendMessage()" #msgForm="ngForm">
+        <div class="input-group">
+            <input type="hidden" [(ngModel)]="msgData.room" name="room" />
+            <input type="hidden" [(ngModel)]="msgData.nickname" name="nickname" />
+            <input id="btn-input" type="text" [(ngModel)]="msgData.message" name="message" class="form-control input-sm" placeholder="Escribe aqui tu mensaje..." required="" />
+            <span class="input-group-btn">
+                <button class="btn btn-warning btn-sm" id="btn-chat" [disabled]="!msgForm.form.valid"> Send</button>
+            </span>
+        </div>
+      </form>
+    </div>
+</div>
+<div class="modal fade product_view" id="{{room}}" *ngIf="producto">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                <h3 class="modal-title">{{producto.name}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 product_img">
+                        <img src="/api/image?id={{room}}" alt="" class="img-responsive">
+                    </div>
+                    <div class="col-md-6 product_content">
+                        <h4>{{producto.name}}</h4>
+                        <p>{{producto.desc}}</p>
+                        <h3 class="cost" *ngIf="producto.preciofin;">{{producto.preciofin}}<span class="glyphicon glyphicon-euro" ></span><small class="pre-cost" >{{producto["precio_sal"]}}<span class="glyphicon glyphicon-euro" ></span></small></h3>
+                        <h3 class="cost" *ngIf="!producto.preciofin;">{{producto["precio_sal"]}}<span class="glyphicon glyphicon-euro"></span></h3>
+                        
+                        <div class="space-ten"></div>
+                        <input [(ngModel)]="precio" placeholder="Introduce tu puja" class="form-control col-md-5">
+                        <div class="btn-ground">
+                            <button type="button" class="btn btn-primary" (click)="pujar()">Pujar <span class="glyphicon glyphicon-shopping-cart"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

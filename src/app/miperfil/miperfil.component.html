@@ -1,0 +1,116 @@
+<div class="row justify-content-space-arround">
+    <div class="card" style="width: 100%;" *ngIf="user">
+        <img [src]="fotoperfil" alt="Imagen de perfil" title="Edita tu perfil para cambiar la foto" style="max-height: 350px; max-width: 200px; align-self: center;">
+        <div class="card-block">
+            <h4 class="card-title">{{user.nombre}} {{user.apellidos}} <br> ({{user.username}})</h4>
+            <p class="card-text" title="Edita tu perfil para añadir tu descripcion">Sobre mi: <br> {{user.descripcion}} </p>
+        </div>
+        <div class="card-block">
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                 (15 reviews)
+            </p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Telefono: {{user.tlf}}</li>
+            <li class="list-group-item">Monedas: {{user.monedas}}</li>
+            <li class="list-group-item">Email: {{user.email}}</li>
+            <li class="list-group-item">Productos comprados: {{lenproductoscomprados}}</li>
+            <li class="list-group-item">Productos vendidos: {{lenproductosvendidos}}</li>
+            <li class="list-group-item">Productos sin vender: {{lenproductosnovendidos}}</li>
+            <li class="list-group-item">Usuario desde: {{fechacreacion}}</li>
+        </ul>
+        <div class="card-block">
+            <a routerLink="/edituser" class="card-link">Editar Perfil</a>
+            <a (click)="masdinero()" class="card-link" id="linkcomprar">Comprar Monedas</a>
+        </div>
+    </div>
+    <div class="container" *ngIf="lenproductosnovendidos>0">
+      <h2>Productos No Vendidos:</h2>                    
+      <div class="table-responsive">          
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Precio Inicial</th>
+                <th>Precio Actual</th>
+                <th>Finalizar Subasta</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let item of productosnovendidos; let i = index">
+              <tr>
+                <td><a [routerLink]="['/subasta', item['_id']]">{{i}}</a></td>
+                <td>{{item.name}}</td>
+                <td>{{item.desc}}</td>
+                <td>{{item["precio_sal"]}}</td>
+                <td *ngIf="item.preciofin">{{item.preciofin}}</td>
+                <td *ngIf="!item.preciofin">{{item["precio_sal"]}}</td>
+                <td><button type="button" class="btn btn-primary" (click)="finSubasta(item['_id'])"><i class="fa fa-search"></i>Finalizar</button></td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+    <div class="container" *ngIf="lenproductosvendidos>0">
+      <h2>Productos Vendidos:</h2>                    
+      <div class="table-responsive">          
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Comprador</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Precio Inicial</th>
+                <th>Precio Final</th>
+                <th>Fecha de Subasta</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let item of productosvendidos; let i = index">
+              <tr>
+                <td>{{i}}</td>
+                <td>{{item.comprador.username}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.desc}}</td>
+                <td>{{item["precio_sal"]}}</td>
+                <td>{{item.preciofin}}</td>
+                <td>{{fechaSub(item["fecha_sub"])}}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+    <div class="container" *ngIf="lenproductoscomprados>0">
+      <h2>Productos Comprados:</h2>                    
+      <div class="table-responsive">          
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Vendedor</th>
+                <th>Email Vendedor</th>
+                <th>Nombre</th>
+                <th>Precio Final</th>
+                <th>Fecha de Compra</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let item of productoscomprados; let i = index">
+              <tr>
+                <td>{{i}}</td>
+                <td>{{item.vendedor.username}}</td>
+                <td>{{item.vendedor.email}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.preciofin}}</td>
+                <td>{{fechaSub(item["fecha_sub"])}}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="card card-block">
+	<form action="/api/upload" method="post" enctype="multipart/form-data">
+		<div class="form-group row justify-content-center">
+			<input type="text" #name name="name" id="productname" tabindex="1" class="form-control col-md-6" placeholder="Nombre del Producto" value="" required>
+			<input type="text" #precioinicial name="precio-inicial" id="precio-inicial" tabindex="2" class="form-control col-md-5" placeholder="Precio de Salida" value="" required>
+			<input type="hidden" #userid name="userid" id="userid" tabindex="2" [value]="iduser">
+		</div>
+		<div class="form-group">
+			<textarea #descripcion name="descripcion" id="descripcion" tabindex="1" class="form-control" placeholder="descripcion" rows="5" value=""></textarea>
+		</div>
+		<div class="form-group">
+			<input type="file" #image name="image" id="image" tabindex="1" accept=".jpg, .png, .jpeg, .gif" class="form-control text-center" value="">
+		</div>
+		<div class="form-group">
+			<div class="row justify-content-center">
+				<input type="submit" style="margin: 0 auto; max-width: 200px" name="save-product" id="save-product" tabindex="4" class="form-control btn btn-success col-md-3" value="Upload">
+			</div>
+		</div>
+	</form>
+</div>

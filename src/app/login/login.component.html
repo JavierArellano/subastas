@@ -1,0 +1,20 @@
+<div class="card card-block text-center">
+	<form id="login-form" role="form" style="display: block;" (submit)="submitFrom(username.value,pass.value,$event)">
+		<div class="form-group">
+			<input type="text" #username name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" required>
+		</div>
+		<div class="form-group">
+			<input type="password" #pass name="pass" id="password" tabindex="2" class="form-control" placeholder="Password" required>
+		</div>
+		<div class="form-group text-center">
+			<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+			<label for="remember"> Remember Me</label>
+		</div>
+		<div class="form-group">
+			<div class="row">
+				<input type="submit" style="margin: 0 auto; max-width: 200px" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login success" value="Log In">
+			</div>
+		</div>
+	</form> 
+	<a routerLink="/register">Join us!</a>
+</div>
